@@ -2,7 +2,6 @@ from sanic import Blueprint, json
 
 login = Blueprint("login", url_prefix="/login")
 
-
 @login.post("/")
 async def do_login(request):
     # print(request.form.get("user"))
