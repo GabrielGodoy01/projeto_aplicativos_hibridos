@@ -5,6 +5,8 @@ from auth import protected
 from login import login
 import os
 
+import database
+
 app = Sanic("AuthApp")
 app.blueprint(login)
 
