@@ -1,28 +1,26 @@
 from functools import wraps
 
-import jwt
-from sanic import text
+from sanic import Sanic, text
 
+from database import conexao_banco
 
-def check_login(request):
-    if not request.token:
-        return False
+app = Sanic.get_app("AuthApp")
 
-    try:
-        jwt.decode(
-            request.token, request.app.config.SECRET, algorithms=["HS256"]
-        )
-    except jwt.exceptions.InvalidTokenError:
-        return False
-    else:
-        return True
+def check_login():
+    usuarios = conexao_banco()
+    for usuario in usuarios:
+        if app.config.USER_RECEIVED == usuario[1]:
+            if app.config.PASSWORD_RECEIVED == usuario[2]:
+                return True
+        else:
+            return False
 
 
 def protected(wrapped):
     def decorator(f):
         @wraps(f)
         async def decorated_function(request, *args, **kwargs):
-            is_authenticated = check_login(request)
+            is_authenticated = check_login()
 
             if is_authenticated:
                 response = await f(request, *args, **kwargs)
