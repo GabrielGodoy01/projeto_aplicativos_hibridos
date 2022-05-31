@@ -28,3 +28,30 @@ def conexao_banco():
             cursor.close()
             connection.close()
             print("Connection closed")
+
+def insercao_banco(user, password):
+    load_dotenv()
+
+    try:
+        connection = mysql.connector.connect(host='localhost',
+                                                database='sentiment',
+                                                user=os.getenv('DB_USER'),
+                                                password=os.getenv('DB_PASSWORD'))
+        cursor = connection.cursor(buffered=True)
+        cursor.execute("INSERT INTO users (name, password) VALUES (%s, %s);", (user, password))
+        connection.commit()
+    except Error as e:
+        print(f"Erro ao inserir no Banco: {e}")
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("Connection closed")
+
+def existe_no_banco(user):
+    usuarios = conexao_banco()
+    for usuario in usuarios:
+        if user == usuario[1]:
+            return True
+        else:
+            return False
