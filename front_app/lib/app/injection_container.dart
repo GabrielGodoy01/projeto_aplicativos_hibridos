@@ -5,6 +5,7 @@ import 'package:front_app/app/modules/auth/infra/datasource/auth_datasource_inte
 import 'package:front_app/app/modules/auth/infra/repositories/auth_repository_mock.dart';
 import 'package:front_app/app/modules/auth/presenter/controllers/auth_controller.dart';
 import 'package:front_app/app/modules/login/login_controller.dart';
+import 'package:front_app/app/modules/user/user_controller.dart';
 import 'package:get_it/get_it.dart';
 
 import 'modules/home/home_controller.dart';
@@ -29,4 +30,7 @@ Future<void> init() async {
 
   //home
   serviceLocator.registerLazySingleton<HomeController>(() => HomeController());
+
+  //user
+  serviceLocator.registerLazySingleton<UserController>(() => UserController());
 }

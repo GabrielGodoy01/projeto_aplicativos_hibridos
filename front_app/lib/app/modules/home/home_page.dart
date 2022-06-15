@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:front_app/app/modules/home/widgets/feelling_card.dart';
 import 'package:front_app/app/modules/home/widgets/user_appbar.dart';
 import 'package:front_app/app/shared/themes/app_colors.dart';
+import 'package:get/get.dart';
 
 import '../../injection_container.dart';
 import '../../shared/widgets/custom_button.dart';
@@ -21,20 +22,27 @@ class _HomePageState extends State<HomePage> {
     var controller = serviceLocator<HomeController>();
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const UserAppbar(username: 'Gabriel'),
-              ClipOval(
-                child: Container(
-                  color: AppColors.black,
-                  height: 80,
-                  width: 80,
-                ),
-              )
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const UserAppbar(username: 'Gabriel'),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed('/home/user');
+                  },
+                  child: ClipOval(
+                    child: Container(
+                      color: AppColors.black,
+                      height: 80,
+                      width: 80,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
