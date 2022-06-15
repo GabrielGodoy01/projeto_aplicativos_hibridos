@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:front_app/app/modules/home/home_page.dart';
 import 'package:front_app/app/modules/login/login_page.dart';
 import 'package:front_app/app/shared/themes/app_colors.dart';
 import 'package:front_app/app/shared/themes/app_text_styles.dart';
@@ -37,10 +38,11 @@ class AppWidget extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             color: AppColors.black,
           ),
-          scaffoldBackgroundColor: AppColors.white),
+          scaffoldBackgroundColor: AppColors.background),
       home: const LoginPage(),
       getPages: [
         GetPage(name: '/login', page: () => const LoginPage()),
+        GetPage(name: '/home', page: () => const HomePage()),
       ],
     );
   }

@@ -7,6 +7,8 @@ import 'package:front_app/app/modules/auth/presenter/controllers/auth_controller
 import 'package:front_app/app/modules/login/login_controller.dart';
 import 'package:get_it/get_it.dart';
 
+import 'modules/home/home_controller.dart';
+
 final serviceLocator = GetIt.instance;
 
 Future<void> init() async {
@@ -24,4 +26,7 @@ Future<void> init() async {
   //login
   serviceLocator.registerLazySingleton<LoginController>(
       () => LoginController(authController: serviceLocator()));
+
+  //home
+  serviceLocator.registerLazySingleton<HomeController>(() => HomeController());
 }

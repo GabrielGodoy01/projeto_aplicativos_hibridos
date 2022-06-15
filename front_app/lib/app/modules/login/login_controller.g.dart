@@ -73,6 +73,22 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_LoginController.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$loginAsyncAction =
       AsyncAction('_LoginController.login', context: context);
 
@@ -83,6 +99,17 @@ mixin _$LoginController on _LoginController, Store {
 
   late final _$_LoginControllerActionController =
       ActionController(name: '_LoginController', context: context);
+
+  @override
+  void setIsLoading(bool value) {
+    final _$actionInfo = _$_LoginControllerActionController.startAction(
+        name: '_LoginController.setIsLoading');
+    try {
+      return super.setIsLoading(value);
+    } finally {
+      _$_LoginControllerActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setEmail(String value) {
@@ -123,7 +150,8 @@ mixin _$LoginController on _LoginController, Store {
 passwordVisibility: ${passwordVisibility},
 errors: ${errors},
 email: ${email},
-password: ${password}
+password: ${password},
+isLoading: ${isLoading}
     ''';
   }
 }

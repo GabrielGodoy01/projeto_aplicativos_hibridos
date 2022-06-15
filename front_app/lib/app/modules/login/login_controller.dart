@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
 import '../auth/errors/errors.dart';
@@ -24,6 +25,14 @@ abstract class _LoginController with Store {
   @observable
   String password = '';
 
+  @observable
+  bool isLoading = false;
+
+  @action
+  void setIsLoading(bool value) {
+    isLoading = value;
+  }
+
   @action
   void setEmail(String value) {
     email = value;
@@ -38,7 +47,9 @@ abstract class _LoginController with Store {
   Future<void> login() async {
     try {
       await authController.loginWithEmail(email, password);
-      if (authController.isLogged) {}
+      if (authController.isLogged) {
+        Get.toNamed('/home');
+      }
     } on Failure catch (e) {
       errors = e.message;
     }
