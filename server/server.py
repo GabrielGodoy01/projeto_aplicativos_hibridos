@@ -10,6 +10,9 @@ app.blueprint(login)
 app.blueprint(signup)
 
 from auth import protected
+from analise import ml
+
+app.blueprint(ml)
 
 @app.get("/secret")
 @protected
