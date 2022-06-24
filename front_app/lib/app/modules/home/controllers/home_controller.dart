@@ -8,18 +8,18 @@ class HomeController = _HomeController with _$HomeController;
 
 abstract class _HomeController with Store {
   @observable
-  List<ListPanelModel> list = [
+  var list = <ListPanelModel>[
     ListPanelModel(
-      model: CardModel(title: '0'),
+      model: CardModel(title: 'Happy'),
     ),
     ListPanelModel(
-      model: CardModel(title: '1'),
+      model: CardModel(title: 'Happy'),
     ),
     ListPanelModel(
-      model: CardModel(title: '2'),
+      model: CardModel(title: 'Happy'),
     ),
     ListPanelModel(
-      model: CardModel(title: '3'),
+      model: CardModel(title: 'Happy'),
     ),
     ListPanelModel(
       model: CardModel(title: '4'),
@@ -52,7 +52,9 @@ abstract class _HomeController with Store {
 
   @action
   void alternateClick(int index, CardModel card) {
-    list[index].changeStateIsOpen();
+    var listToChange = List<ListPanelModel>.from(list);
+    listToChange[index].changeStateIsOpen();
+    list = listToChange;
     selectFeeling.contains(card)
         ? selectFeeling.removeWhere((element) => element.title == card.title)
         : selectFeeling.add(card);

@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:front_app/app/injection_container.dart';
 import 'package:front_app/app/shared/themes/app_colors.dart';
 import 'package:front_app/app/shared/widgets/custom_button.dart';
-import '../controllers/login_controller.dart';
+import '../../controllers/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

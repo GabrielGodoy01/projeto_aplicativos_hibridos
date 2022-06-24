@@ -6,9 +6,9 @@ import 'package:front_app/app/shared/themes/app_colors.dart';
 import 'package:front_app/app/shared/themes/app_text_styles.dart';
 import 'package:get/get.dart';
 
-import '../../../injection_container.dart';
-import '../../../shared/widgets/custom_button.dart';
-import '../controllers/home_controller.dart';
+import '../../../../injection_container.dart';
+import '../../../../shared/widgets/custom_button.dart';
+import '../../controllers/home_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -47,27 +47,32 @@ class _HomePageState extends State<HomePage> {
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: controller.list.length,
-                  itemBuilder: (context, index) {
-                    return Observer(builder: (_) {
-                      return FeelingCardWidget(
-                        text: controller.list[index].model.title,
-                        isClicked: controller.list[index].isClicked,
-                        onPressed: () {
-                          controller.alternateClick(
-                              index, controller.list[index].model);
-                        },
-                      );
+              child: Observer(builder: (_) {
+                return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 8,
+                    ),
+                    itemCount: controller.list.length,
+                    itemBuilder: (context, index) {
+                      return Observer(builder: (_) {
+                        return FeelingCardWidget(
+                          text: controller.list[index].model.title,
+                          isClicked: controller.list[index].isClicked,
+                          onPressed: () {
+                            controller.alternateClick(
+                              index,
+                              controller.list[index].model,
+                            );
+                          },
+                        );
+                      });
                     });
-                  })),
+              })),
           const SizedBox(
             height: 32,
           ),

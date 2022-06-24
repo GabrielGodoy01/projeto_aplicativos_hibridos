@@ -19,16 +19,26 @@ class FeelingCardWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       onPressed: onPressed,
-      child: Center(
-        child: isClicked
-            ? const Icon(
-                Icons.check,
-                color: AppColors.black,
-              )
-            : Text(
-                text,
-                style: AppTextStyles.titleH2,
-              ),
+      child: Stack(
+        children: [
+          Center(
+            child: Text(
+              text,
+              style: AppTextStyles.titleH2,
+            ),
+          ),
+          isClicked
+              ? const Positioned(
+                  right: 0,
+                  top: 4,
+                  child: Icon(
+                    Icons.check,
+                    size: 28,
+                    color: AppColors.black,
+                  ),
+                )
+              : const SizedBox.shrink()
+        ],
       ),
     );
   }
