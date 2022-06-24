@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 
-import '../../shared/model/feeling_historic_model.dart';
+import '../../../shared/model/feeling_historic_model.dart';
 
 part 'user_controller.g.dart';
 

@@ -23,13 +23,13 @@ class AppTextStyles {
 
   static final TextStyle bodyH4 = GoogleFonts.notoSans(
     color: AppColors.black,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.normal,
   );
 
   static final TextStyle bodyBoldH4 = GoogleFonts.notoSans(
     color: AppColors.black,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 }

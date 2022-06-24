@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
-import '../auth/errors/errors.dart';
-import '../auth/presenter/controllers/auth_controller.dart';
+import '../../auth/errors/errors.dart';
+import '../../auth/presenter/controllers/auth_controller.dart';
 
 part 'login_controller.g.dart';
 

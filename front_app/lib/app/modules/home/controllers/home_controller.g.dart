@@ -24,15 +24,31 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
+  late final _$selectFeelingAtom =
+      Atom(name: '_HomeController.selectFeeling', context: context);
+
+  @override
+  List<CardModel> get selectFeeling {
+    _$selectFeelingAtom.reportRead();
+    return super.selectFeeling;
+  }
+
+  @override
+  set selectFeeling(List<CardModel> value) {
+    _$selectFeelingAtom.reportWrite(value, super.selectFeeling, () {
+      super.selectFeeling = value;
+    });
+  }
+
   late final _$_HomeControllerActionController =
       ActionController(name: '_HomeController', context: context);
 
   @override
-  void alternateClick(int index) {
+  void alternateClick(int index, CardModel card) {
     final _$actionInfo = _$_HomeControllerActionController.startAction(
         name: '_HomeController.alternateClick');
     try {
-      return super.alternateClick(index);
+      return super.alternateClick(index, card);
     } finally {
       _$_HomeControllerActionController.endAction(_$actionInfo);
     }
@@ -41,7 +57,8 @@ mixin _$HomeController on _HomeController, Store {
   @override
   String toString() {
     return '''
-list: ${list}
+list: ${list},
+selectFeeling: ${selectFeeling}
     ''';
   }
 }

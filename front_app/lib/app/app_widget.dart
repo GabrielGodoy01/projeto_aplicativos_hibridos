@@ -16,7 +16,6 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Intl.defaultLocale = 'pt_BR';
     return GetMaterialApp(
-      initialRoute: '/login',
       supportedLocales: const [Locale('pt', 'BR')],
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
