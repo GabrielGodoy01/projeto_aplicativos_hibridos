@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:front_app/app/injection_container.dart';
-import 'package:front_app/app/shared/themes/app_colors.dart';
-import 'package:front_app/app/shared/themes/app_text_styles.dart';
-import 'package:front_app/app/shared/widgets/custom_button.dart';
 import 'package:get/get.dart';
-import '../../controllers/login_controller.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import '../../../../injection_container.dart';
+import '../../../../shared/themes/app_colors.dart';
+import '../../../../shared/themes/app_text_styles.dart';
+import '../../../../shared/widgets/custom_button.dart';
+import '../../controllers/register_controller.dart';
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
-class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    var controller = serviceLocator<LoginController>();
+    var controller = serviceLocator<RegisterController>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -35,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 64,
             ),
             Text(
-              'Login',
+              'Cadastro',
               style: AppTextStyles.titleH1,
             ),
             const SizedBox(
@@ -90,16 +86,16 @@ class _LoginPageState extends State<LoginPage> {
             CustomButton(
               isLoading: controller.isLoading,
               onPressed: () async {
-                await controller.login();
+                await controller.register();
               },
-              text: 'Entrar',
+              text: 'Registrar',
             ),
             TextButton(
                 onPressed: () {
-                  Get.toNamed('/register');
+                  Get.toNamed('/login');
                 },
                 child: Text(
-                  'Registrar-se',
+                  'Já tenho cadastro',
                   style: AppTextStyles.titleH2,
                 ))
           ],

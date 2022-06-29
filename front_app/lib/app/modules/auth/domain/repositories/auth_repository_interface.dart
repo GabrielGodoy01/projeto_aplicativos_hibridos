@@ -1,3 +1,4 @@
 abstract class AuthRepositoryInterface {
-  Future<Map<String, dynamic>> login(String user, String password);
+  Future<bool> login(String user, String password);
+  Future<bool> register(String user, String password);
 }
