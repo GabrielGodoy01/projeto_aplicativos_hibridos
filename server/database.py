@@ -6,6 +6,14 @@ from dotenv import load_dotenv
 
 app = Sanic("MySQL")
 
+##########################################
+# Criar um DATABASE chamado sentiment e 
+# uma TABELA chamada users no mysql
+#
+# Dentro de users, colocar duas colunas:
+# usuario e senha
+##########################################
+
 def conexao_banco():
     load_dotenv()
 
