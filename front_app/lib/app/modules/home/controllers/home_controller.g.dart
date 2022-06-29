@@ -9,46 +9,39 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HomeController on _HomeController, Store {
-  late final _$listAtom = Atom(name: '_HomeController.list', context: context);
+  late final _$phraseAtom =
+      Atom(name: '_HomeController.phrase', context: context);
 
   @override
-  List<ListPanelModel<dynamic>> get list {
-    _$listAtom.reportRead();
-    return super.list;
+  String get phrase {
+    _$phraseAtom.reportRead();
+    return super.phrase;
   }
 
   @override
-  set list(List<ListPanelModel<dynamic>> value) {
-    _$listAtom.reportWrite(value, super.list, () {
-      super.list = value;
+  set phrase(String value) {
+    _$phraseAtom.reportWrite(value, super.phrase, () {
+      super.phrase = value;
     });
   }
 
-  late final _$selectFeelingAtom =
-      Atom(name: '_HomeController.selectFeeling', context: context);
+  late final _$postPhraseAsyncAction =
+      AsyncAction('_HomeController.postPhrase', context: context);
 
   @override
-  List<CardModel> get selectFeeling {
-    _$selectFeelingAtom.reportRead();
-    return super.selectFeeling;
-  }
-
-  @override
-  set selectFeeling(List<CardModel> value) {
-    _$selectFeelingAtom.reportWrite(value, super.selectFeeling, () {
-      super.selectFeeling = value;
-    });
+  Future<dynamic> postPhrase() {
+    return _$postPhraseAsyncAction.run(() => super.postPhrase());
   }
 
   late final _$_HomeControllerActionController =
       ActionController(name: '_HomeController', context: context);
 
   @override
-  void alternateClick(int index, CardModel card) {
+  void setPhrase(String value) {
     final _$actionInfo = _$_HomeControllerActionController.startAction(
-        name: '_HomeController.alternateClick');
+        name: '_HomeController.setPhrase');
     try {
-      return super.alternateClick(index, card);
+      return super.setPhrase(value);
     } finally {
       _$_HomeControllerActionController.endAction(_$actionInfo);
     }
@@ -57,8 +50,7 @@ mixin _$HomeController on _HomeController, Store {
   @override
   String toString() {
     return '''
-list: ${list},
-selectFeeling: ${selectFeeling}
+phrase: ${phrase}
     ''';
   }
 }

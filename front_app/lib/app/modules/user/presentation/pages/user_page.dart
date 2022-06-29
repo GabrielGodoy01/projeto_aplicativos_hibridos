@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_app/app/modules/user/controllers/user_controller.dart';
 import 'package:front_app/app/modules/user/presentation/widgets/historic_card_widget.dart';
 import 'package:get/get.dart';
-
 import '../../../../injection_container.dart';
-import '../../../../shared/themes/app_colors.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -36,12 +34,15 @@ class _UserPageState extends State<UserPage> {
                       Icons.arrow_back_ios,
                     )),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed('/home');
+                  },
                   child: ClipOval(
-                    child: Container(
-                      color: AppColors.black,
+                    child: SizedBox(
                       height: 80,
                       width: 80,
+                      child: Image.asset('assets/images/pikachu.png',
+                          fit: BoxFit.fitHeight),
                     ),
                   ),
                 )

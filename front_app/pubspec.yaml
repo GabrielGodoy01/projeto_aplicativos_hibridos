@@ -34,6 +34,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/feelings.png
+    - assets/images/pikachu.png
 
 scripts:
   mobx_build: flutter pub run build_runner build

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:front_app/app/modules/home/presentation/widgets/feelling_card_widget.dart';
 import 'package:front_app/app/modules/home/presentation/widgets/user_appbar.dart';
 import 'package:front_app/app/shared/themes/app_colors.dart';
 import 'package:front_app/app/shared/themes/app_text_styles.dart';
@@ -24,62 +22,39 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const UserAppbar(username: 'Gabriel'),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed('/home/user');
-                  },
-                  child: ClipOval(
-                    child: Container(
-                      color: AppColors.black,
-                      height: 80,
-                      width: 80,
-                    ),
-                  ),
-                )
-              ],
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 32, horizontal: 32),
+            child: UserAppbar(),
+          ),
+          const SizedBox(
+            height: 64,
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Observer(builder: (_) {
-                return GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 8,
-                    ),
-                    itemCount: controller.list.length,
-                    itemBuilder: (context, index) {
-                      return Observer(builder: (_) {
-                        return FeelingCardWidget(
-                          text: controller.list[index].model.title,
-                          isClicked: controller.list[index].isClicked,
-                          onPressed: () {
-                            controller.alternateClick(
-                              index,
-                              controller.list[index].model,
-                            );
-                          },
-                        );
-                      });
-                    });
-              })),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextField(
+              minLines: 1,
+              maxLines: 5,
+              keyboardType: TextInputType.multiline,
+              onChanged: controller.setPhrase,
+              decoration: const InputDecoration(
+                  labelStyle: TextStyle(color: AppColors.black),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  labelText:
+                      'Digite, EM INGLÊS, como você está se sentindo hoje:',
+                  prefixIcon: Icon(
+                    Icons.edit,
+                    color: AppColors.black,
+                  )),
+            ),
+          ),
           const SizedBox(
-            height: 32,
+            height: 64,
           ),
           CustomButton(
             isLoading: false,
             onPressed: () {
-              controller.selectFeeling.isEmpty
+              controller.phrase.isEmpty || controller.phrase == ''
                   ? showDialog(
                       context: context,
                       builder: (builder) {
@@ -88,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15))),
                           title: Text(
-                            'Escolha pelo menos um sentimento',
+                            'Digite algo para poder continuar',
                             style: AppTextStyles.cardH3
                                 .copyWith(fontWeight: FontWeight.bold),
                           ),
@@ -113,30 +88,20 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15))),
                           title: Text(
-                            'Valide os sentimentos selecionados:',
+                            'Tem certeza sobre o que escreveu? Está em inglês?',
                             style: AppTextStyles.cardH3
                                 .copyWith(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          content: SizedBox(
-                            height: 80,
-                            width: 80,
-                            child: ListView.builder(
-                              itemCount: controller.selectFeeling.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Text(
-                                  controller.selectFeeling[index].title,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.bodyBoldH4,
-                                );
-                              },
-                            ),
-                          ),
-                          actions: const [
+                          actions: [
                             Center(
                                 child: CustomButton(
-                                    isLoading: false, text: 'Vamos lá!')),
+                              isLoading: false,
+                              text: 'Vamos lá!',
+                              onPressed: () {
+                                controller.postPhrase();
+                              },
+                            )),
                           ],
                         );
                       });
