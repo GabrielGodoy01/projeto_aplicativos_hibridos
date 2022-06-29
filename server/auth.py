@@ -15,8 +15,6 @@ def check_login(request):
         if request.app.config.USER_RECEIVED == usuario[1]:
             if request.app.config.PASSWORD_RECEIVED == usuario[2]:
                 return True
-        else:
-            return False
 
 
 def protected(wrapped):
@@ -29,7 +27,7 @@ def protected(wrapped):
                 response = await f(request, *args, **kwargs)
                 return response
             else:
-                return text("You are unauthorized.", 401)
+                return text("You are unauthorized.\n", 401)
 
         return decorated_function
 

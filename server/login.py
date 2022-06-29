@@ -10,8 +10,9 @@ async def do_login(request):
     # print(request.form.get("password"))
     request.app.config.USER_RECEIVED = request.form.get("user")
     request.app.config.PASSWORD_RECEIVED = request.form.get("password")
-    if not existe_no_banco(request.app.config.USER_RECEIVED):
+    if not existe_no_banco(request.form.get("user")):
         return text("Usuário não encontrado.\n", 404)
-    return text("Login bem sucedido.\n", 200)
+    else:
+        return text("Login bem sucedido.\n", 200)
 
 # curl localhost:8000/login -d "user=Matheus&password=senha"

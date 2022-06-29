@@ -59,7 +59,8 @@ def insercao_banco(user, password):
 def existe_no_banco(user):
     usuarios = conexao_banco()
     for usuario in usuarios:
+        #print(usuario)
         if user == usuario[1]:
             return True
-        else:
-            return False
+        # else:
+        #     return False
