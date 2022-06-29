@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:front_app/app/modules/home/presentation/pages/home_page.dart';
 import 'package:front_app/app/modules/login/presentation/pages/login_page.dart';
+import 'package:front_app/app/modules/register/presentation/pages/register_page.dart';
 import 'package:front_app/app/modules/user/presentation/pages/user_page.dart';
 import 'package:front_app/app/shared/themes/app_colors.dart';
 import 'package:front_app/app/shared/themes/app_text_styles.dart';
@@ -42,6 +43,7 @@ class AppWidget extends StatelessWidget {
       home: const LoginPage(),
       getPages: [
         GetPage(name: '/login', page: () => const LoginPage()),
+        GetPage(name: '/register', page: () => const RegisterPage()),
         GetPage(name: '/home', page: () => const HomePage()),
         GetPage(name: '/home/user', page: () => const UserPage()),
       ],

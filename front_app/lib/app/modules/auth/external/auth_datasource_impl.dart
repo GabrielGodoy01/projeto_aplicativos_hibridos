@@ -1,12 +1,55 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../infra/datasource/auth_datasource_interface.dart';
 
 class AuthDatasourceImpl implements AuthDatasourceInterface {
-  final Dio dioClient;
+  var dio = Dio(BaseOptions(
+    baseUrl: 'http://localhost:8000',
+    responseType: ResponseType.json,
+    connectTimeout: 30000,
+    receiveTimeout: 30000,
+  ));
 
-  AuthDatasourceImpl({required this.dioClient});
   @override
-  Future<bool> login(email, password) async {
-    return true;
+  Future<bool> login(user, password) async {
+    try {
+      var body = {'user': user, 'password': password};
+      var res = await dio.post('/login', data: body);
+      if (res.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } on DioError catch (e) {
+      log(e.message);
+      Get.snackbar(
+        'O seguinte erro ocorreu: ',
+        e.message,
+        backgroundColor: Colors.white,
+      );
+      rethrow;
+    }
+  }
+
+  @override
+  Future<bool> register(String user, String password) async {
+    try {
+      var body = {'user': user, 'password': password};
+      var res = await dio.post('/singup', data: body);
+      if (res.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } on DioError catch (e) {
+      log(e.message);
+      Get.snackbar(
+        'O seguinte erro ocorreu: ',
+        e.message,
+        backgroundColor: Colors.white,
+      );
+      rethrow;
+    }
   }
 }
