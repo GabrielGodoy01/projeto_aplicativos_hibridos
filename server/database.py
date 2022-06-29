@@ -11,7 +11,7 @@ app = Sanic("MySQL")
 # uma TABELA chamada users no mysql
 #
 # Dentro de users, colocar duas colunas:
-# usuario e senha
+# name e password
 ##########################################
 
 def conexao_banco():
@@ -35,7 +35,7 @@ def conexao_banco():
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("Connection closed")
+            #print("Connection closed")
 
 def insercao_banco(user, password):
     load_dotenv()
@@ -54,7 +54,7 @@ def insercao_banco(user, password):
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("Connection closed")
+            #print("Connection closed")
 
 def existe_no_banco(user):
     usuarios = conexao_banco()
