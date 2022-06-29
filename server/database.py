@@ -6,6 +6,14 @@ from dotenv import load_dotenv
 
 app = Sanic("MySQL")
 
+##########################################
+# Criar um DATABASE chamado sentiment e 
+# uma TABELA chamada users no mysql
+#
+# Dentro de users, colocar duas colunas:
+# name e password
+##########################################
+
 def conexao_banco():
     load_dotenv()
 
@@ -27,7 +35,7 @@ def conexao_banco():
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("Connection closed")
+            #print("Connection closed")
 
 def insercao_banco(user, password):
     load_dotenv()
@@ -46,7 +54,7 @@ def insercao_banco(user, password):
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("Connection closed")
+            #print("Connection closed")
 
 def existe_no_banco(user):
     usuarios = conexao_banco()
