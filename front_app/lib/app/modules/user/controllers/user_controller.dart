@@ -1,37 +1,22 @@
+import 'package:front_app/app/modules/home/domain/repositories/feeling_repository_interface.dart';
 import 'package:mobx/mobx.dart';
-
 import '../../../shared/model/feeling_historic_model.dart';
-
 part 'user_controller.g.dart';
 
 class UserController = _UserController with _$UserController;
 
 abstract class _UserController with Store {
+  FeelingRepositoryInterface repository;
+  _UserController({
+    required this.repository,
+  }) {
+    getMyHistoric();
+  }
+
   @observable
-  List<FeelingHistoricModel> list = [
-    FeelingHistoricModel(
-      title: 'Hoje fiz sexo',
-      description:
-          'Você se sentiu feliz pra caralho Você se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralho',
-      date: DateTime.now(),
-    ),
-    FeelingHistoricModel(
-      title: 'Hoje fiz sexo',
-      description:
-          'Você se sentiu feliz pra caralho Você se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralho',
-      date: DateTime.now(),
-    ),
-    FeelingHistoricModel(
-      title: 'Hoje fiz sexo',
-      description:
-          'Você se sentiu feliz pra caralho Você se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralho',
-      date: DateTime.now(),
-    ),
-    FeelingHistoricModel(
-      title: 'Hoje fiz sexo',
-      description:
-          'Você se sentiu feliz pra caralho Você se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralho',
-      date: DateTime.now(),
-    ),
-  ];
+  List<FeelingHistoricModel> list = [];
+
+  void getMyHistoric() {
+    list = repository.getHistoric();
+  }
 }

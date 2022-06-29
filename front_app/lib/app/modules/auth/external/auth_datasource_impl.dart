@@ -3,15 +3,14 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../infra/datasource/auth_datasource_interface.dart';
 
 class AuthDatasourceImpl implements AuthDatasourceInterface {
-  var dio = Dio(BaseOptions(
-    baseUrl: 'http://localhost:8000',
-    responseType: ResponseType.json,
-    connectTimeout: 30000,
-    receiveTimeout: 30000,
-  ));
+  Dio dio;
+  AuthDatasourceImpl({
+    required this.dio,
+  });
 
   @override
   Future<bool> login(user, password) async {

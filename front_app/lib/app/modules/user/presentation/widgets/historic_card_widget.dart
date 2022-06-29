@@ -48,7 +48,7 @@ class HistoricCardWidget extends StatelessWidget {
               top: 8,
               left: 8,
               child: Text(
-                '${date.toUtc().day}/${date.toUtc().month}/${date.toUtc().year}',
+                '${date.hour}:${date.minute} ${date.toUtc().day}/${date.toUtc().month}/${date.toUtc().year}',
                 style: AppTextStyles.cardH3,
               ))
         ],
