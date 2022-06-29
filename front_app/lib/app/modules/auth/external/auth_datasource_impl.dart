@@ -20,6 +20,10 @@ class AuthDatasourceImpl implements AuthDatasourceInterface {
       if (res.statusCode == 200) {
         return true;
       }
+      Get.rawSnackbar(
+        title: res.data,
+        backgroundColor: Colors.white,
+      );
       return false;
     } on DioError catch (e) {
       log(e.message);
@@ -36,7 +40,7 @@ class AuthDatasourceImpl implements AuthDatasourceInterface {
   Future<bool> register(String user, String password) async {
     try {
       var body = {'user': user, 'password': password};
-      var res = await dio.post('/singup', data: body);
+      var res = await dio.post('/signup', data: body);
       if (res.statusCode == 200) {
         return true;
       }

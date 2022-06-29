@@ -22,7 +22,9 @@ class CustomButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       child: isLoading
-          ? const CircularProgressIndicator()
+          ? const CircularProgressIndicator(
+              color: Colors.white,
+            )
           : Text(
               text,
               textAlign: TextAlign.center,

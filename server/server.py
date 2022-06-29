@@ -11,12 +11,10 @@ CORS(app)
 app.blueprint(login)
 app.blueprint(signup)
 
-from auth import protected
 from analise import ml
 
 app.blueprint(ml)
 
 @app.get("/secret")
-@protected
 async def secret(request):
     return text("To go fast, you must be fast.")

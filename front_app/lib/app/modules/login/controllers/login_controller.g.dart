@@ -41,19 +41,18 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
-  late final _$emailAtom =
-      Atom(name: '_LoginController.email', context: context);
+  late final _$userAtom = Atom(name: '_LoginController.user', context: context);
 
   @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
+  String get user {
+    _$userAtom.reportRead();
+    return super.user;
   }
 
   @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
+  set user(String value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
     });
   }
 
@@ -149,7 +148,7 @@ mixin _$LoginController on _LoginController, Store {
     return '''
 passwordVisibility: ${passwordVisibility},
 errors: ${errors},
-email: ${email},
+user: ${user},
 password: ${password},
 isLoading: ${isLoading}
     ''';

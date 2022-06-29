@@ -1,66 +1,25 @@
 from sanic import Sanic
-import mysql.connector
-from mysql.connector import Error
 import os
-from dotenv import load_dotenv
 
-app = Sanic("MySQL")
+feelings = [{
+    "title" : "Qualquer",
+    "description" : "Qualquer",
+    "date" : "19/08/2021"
+}]
+users = [{
+    "user" : "123",
+    "password" : "123"
+}]
 
-##########################################
-# Criar um DATABASE chamado sentiment e 
-# uma TABELA chamada users no mysql
-#
-# Dentro de users, colocar duas colunas:
-# name e password
-##########################################
 
-def conexao_banco():
-    load_dotenv()
+def inserir_feeling(feeling):
+    feelings.append(feeling)
 
-    try:
-        connection = mysql.connector.connect(host='localhost',
-                                                database='sentiment',
-                                                user=os.getenv('DB_USER'),
-                                                password=os.getenv('DB_PASSWORD'))
-        if connection.is_connected():
-            cursor = connection.cursor(buffered=True)
-            cursor.execute("select * from users;")
-            rows = cursor.fetchall()
-            return rows
-            # for r in rows:
-            #     print(r)
-    except Error as e:
-        print(f"Erro ao conectar ao MySQL: {e}")
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            #print("Connection closed")
+def inserir_usuário(user, password):
+    users.append({"user" : user, "password" : password})
 
-def insercao_banco(user, password):
-    load_dotenv()
-
-    try:
-        connection = mysql.connector.connect(host='localhost',
-                                                database='sentiment',
-                                                user=os.getenv('DB_USER'),
-                                                password=os.getenv('DB_PASSWORD'))
-        cursor = connection.cursor(buffered=True)
-        cursor.execute("INSERT INTO users (name, password) VALUES (%s, %s);", (user, password))
-        connection.commit()
-    except Error as e:
-        print(f"Erro ao inserir no Banco: {e}")
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            #print("Connection closed")
-
-def existe_no_banco(user):
-    usuarios = conexao_banco()
-    for usuario in usuarios:
-        #print(usuario)
-        if user == usuario[1]:
+def existe_no_banco(user, password):
+    for json in users:
+        if json["user"] == user and json["password"] == password:
             return True
-        # else:
-        #     return False
+    return False

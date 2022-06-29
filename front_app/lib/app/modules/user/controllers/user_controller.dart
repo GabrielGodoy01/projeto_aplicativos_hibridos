@@ -16,7 +16,7 @@ abstract class _UserController with Store {
   @observable
   List<FeelingHistoricModel> list = [];
 
-  void getMyHistoric() {
-    list = repository.getHistoric();
+  void getMyHistoric() async {
+    list = await repository.getHistoric();
   }
 }

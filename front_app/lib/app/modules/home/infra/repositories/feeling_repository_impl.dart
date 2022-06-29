@@ -11,14 +11,7 @@ class FeelingRepository implements FeelingRepositoryInterface {
     required this.datasource,
   });
 
-  var feelingList = <FeelingHistoricModel>[
-    FeelingHistoricModel(
-      title: 'Hoje fiz sexo',
-      description:
-          'Você se sentiu feliz pra caralho Você se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralhoVocê se sentiu feliz pra caralho',
-      date: DateTime.now(),
-    ),
-  ];
+  var feelingList = <FeelingHistoricModel>[];
 
   @override
   Future<String> postPhrase(String phrase) async {
@@ -26,11 +19,11 @@ class FeelingRepository implements FeelingRepositoryInterface {
     var toAdd = FeelingHistoricModel(
         title: response, description: phrase, date: DateTime.now());
     feelingList.add(toAdd);
-    return Future.value(response);
+    return response;
   }
 
   @override
-  List<FeelingHistoricModel> getHistoric() {
+  Future<List<FeelingHistoricModel>> getHistoric() async {
     return feelingList;
   }
 }

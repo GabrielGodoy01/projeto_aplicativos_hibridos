@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:front_app/app/modules/home/presentation/widgets/user_appbar.dart';
 import 'package:front_app/app/shared/themes/app_colors.dart';
 import 'package:front_app/app/shared/themes/app_text_styles.dart';
@@ -94,14 +95,48 @@ class _HomePageState extends State<HomePage> {
                             textAlign: TextAlign.center,
                           ),
                           actions: [
-                            Center(
-                                child: CustomButton(
-                              isLoading: false,
-                              text: 'Vamos lá!',
-                              onPressed: () {
-                                controller.postPhrase();
-                              },
-                            )),
+                            Center(child: Observer(builder: (context) {
+                              return CustomButton(
+                                isLoading: controller.isLoading,
+                                text: 'Vamos lá!',
+                                onPressed: () async {
+                                  await controller.postPhrase();
+                                  Get.back();
+                                  showDialog(
+                                      context: context,
+                                      builder: (builder) {
+                                        return AlertDialog(
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(15))),
+                                          title: Text(
+                                            'Este é o resultado de seu sentimento:',
+                                            style: AppTextStyles.cardH3
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          content: Text(
+                                            controller.response,
+                                            style: AppTextStyles.bodyH4,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          actions: [
+                                            Center(
+                                                child: CustomButton(
+                                              isLoading: false,
+                                              text: 'Entendi',
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                            )),
+                                          ],
+                                        );
+                                      });
+                                },
+                              );
+                            })),
                           ],
                         );
                       });

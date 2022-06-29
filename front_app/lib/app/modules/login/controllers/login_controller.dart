@@ -20,7 +20,7 @@ abstract class _LoginController with Store {
   String errors = '';
 
   @observable
-  String email = '';
+  String user = '';
 
   @observable
   String password = '';
@@ -35,7 +35,7 @@ abstract class _LoginController with Store {
 
   @action
   void setEmail(String value) {
-    email = value;
+    user = value;
   }
 
   @action
@@ -46,7 +46,7 @@ abstract class _LoginController with Store {
   @action
   Future<void> login() async {
     try {
-      await authController.loginWithEmail(email, password);
+      await authController.loginWithEmail(user, password);
       if (authController.isLogged) {
         Get.toNamed('/home');
       }

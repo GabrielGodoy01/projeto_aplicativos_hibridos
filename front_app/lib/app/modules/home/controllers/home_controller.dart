@@ -13,7 +13,18 @@ abstract class _HomeController with Store {
   });
 
   @observable
+  var isLoading = false;
+
+  @action
+  void setIsLoading(bool value) {
+    isLoading = value;
+  }
+
+  @observable
   var phrase = '';
+
+  @observable
+  var response = '';
 
   @action
   void setPhrase(String value) {
@@ -22,6 +33,8 @@ abstract class _HomeController with Store {
 
   @action
   Future postPhrase() async {
-    await repository.postPhrase(phrase);
+    setIsLoading(true);
+    response = await repository.postPhrase(phrase);
+    setIsLoading(false);
   }
 }

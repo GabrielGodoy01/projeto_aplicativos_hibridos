@@ -14,7 +14,7 @@ class FeelingDatasource implements FeelingDatasourceInterface {
   @override
   Future<String> myFeeling(String phrase) async {
     try {
-      var body = {'sentiment': phrase};
+      var body = {'feeling': phrase};
       var res = await dio.post('/predict', data: body);
       if (res.statusCode == 200) {
         return res.data;
